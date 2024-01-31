@@ -1,0 +1,1 @@
+pyinstaller --onefile --add-data "MachineLogs.txt;." --add-data "MT5Credentials.csv;." --add-data "MT5Integration.py;." --add-data "TradeSettings.csv;." --hidden-import MetaTrader5 --hidden-import pandas --hidden-import pytz MainStrategy.py

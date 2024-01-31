@@ -247,7 +247,9 @@ def write_to_order_logs(message):
 # trade.mt_buy(symbol="EURUSD",lot=0.01,MagicNumber=12345)
 
 # trade.mt_close_sell(symbol="EURUSD",lot=0.01,orderid=64504309)
-# main_strategy ()
+while True:
+
+    main_strategy ()
 
 
 

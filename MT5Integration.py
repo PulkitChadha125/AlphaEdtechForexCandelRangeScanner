@@ -29,7 +29,7 @@ def get_data(symbol, timeframe):
     end_date = datetime.now(pytz.timezone("Etc/UTC")).replace(hour=datetime.now().hour, minute=datetime.now().minute, second=0, microsecond=0)
     OHLC_DATA = pd.DataFrame(mt.copy_rates_range(symbol, timeframe, start_date, end_date)).tail(3)
     OHLC_DATA['time'] = pd.to_datetime(OHLC_DATA['time'], unit='s')
-    OHLC_DATA.to_csv('checking.csv')
+
     return OHLC_DATA
 
 
