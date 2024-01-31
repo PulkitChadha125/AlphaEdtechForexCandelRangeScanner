@@ -1,0 +1,4 @@
+Symbol,CalculationType,TimeFrame,CandleRange,AveragingStep,NumberOfTrades,Quantity,QuantityMultiplier,RangePercentage,Stoploss,TargetRangePercentage,MagicNumber,USESL,StartTime,StopTime
+EURUSD,PIP,TIMEFRAME_M1,5,1,6,2,2,40,7,20,12345,TRUE,,
+GBPUSD,PIP,TIMEFRAME_M5,8,2,8,2,2,20,9,50,67890,FALSE,,
+XAUUSD,POINTS,TIMEFRAME_M15,9,3,2,5,2,10,3,30.5,32547,TRUE,,
