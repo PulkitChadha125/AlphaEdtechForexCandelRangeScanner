@@ -1,0 +1,2 @@
+01/02/2024 16:49:27 Short order executed for XAUUSD for lotsize= 1  @ 2031.91 ,Step = 1,Target1 =
+01/02/2024 21:11:52 Short order executed for XAUUSD for lotsize= 1  @ 2050.07 ,Step = 1,Target1 = 2049.535
