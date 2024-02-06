@@ -83,7 +83,7 @@ def mt_buy(symbol,lot,MagicNumber):
 
 def mt_short(symbol,lot,MagicNumber):
     try:
-        price = mt.symbol_info_tick(symbol).ask
+        price = mt.symbol_info_tick(symbol).bid
         point = mt.symbol_info(symbol).point
         request = {
             "action": mt.TRADE_ACTION_DEAL,
@@ -103,7 +103,7 @@ def mt_short(symbol,lot,MagicNumber):
 
 def mt_close_buy(symbol,lot,orderid):
     try:
-        price = mt.symbol_info_tick(symbol).ask
+        price = mt.symbol_info_tick(symbol).bid
         request = {
             "action": mt.TRADE_ACTION_DEAL,
             "symbol": symbol,
@@ -123,7 +123,7 @@ def mt_close_buy(symbol,lot,orderid):
 
 def mt_close_sell(symbol,lot,orderid):
     try:
-        price = mt.symbol_info_tick(symbol).bid
+        price = mt.symbol_info_tick(symbol).ask
         request = {
             "action": mt.TRADE_ACTION_DEAL,
             "symbol": symbol,

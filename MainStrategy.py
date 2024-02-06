@@ -48,6 +48,7 @@ def get_user_settings():
                 'perval':0,
                 'fixed_low_sell':0,
                 'fixed_high_buy':0,
+                'ExitTime':0,
             }
             result_dict[row['Symbol']] = symbol_dict
         print(result_dict)
@@ -144,6 +145,7 @@ def main_strategy ():
             high=float(symr_row1['high'])
             low=float(symr_row1['low'])
             close=float(symr_row1['close'])
+            candletime=symr_row1['time']
             diff_to_high = abs(close - high)
             diff_to_low = abs(close - low)
             value_to_compare= high-low
@@ -151,7 +153,7 @@ def main_strategy ():
             timestamp = datetime.now()
             timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
 
-            if float(value_to_compare) >= candle_range and params['InitialTrade'] == None and diff_to_high < diff_to_low :
+            if params['ExitTime'] != candletime and float(value_to_compare) >= candle_range and params['InitialTrade'] == None and diff_to_high < diff_to_low :
                 # open sell
                 params['InitialTrade']="SHORT"
                 params['AveragingStepCount']=params['AveragingStepCount']+1
@@ -171,7 +173,7 @@ def main_strategy ():
                 write_to_order_logs(orderlog)
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']),MagicNumber= int(params['MagicNumber']))
 
-            if float(value_to_compare) >= candle_range and params['InitialTrade'] == None and float(params['NextTradeVal'])>0 and diff_to_high > diff_to_low:
+            if params['ExitTime'] != candletime and float(value_to_compare) >= candle_range and params['InitialTrade'] == None and float(params['NextTradeVal'])>0 and diff_to_high > diff_to_low:
                 # open buy
                 params['InitialTrade']="BUY"
                 params['AveragingStepCount'] = params['AveragingStepCount'] + 1
@@ -257,7 +259,8 @@ def main_strategy ():
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
                 params['Quantity']=float(params['InitialQuantity'] )
-                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol}"
+                params['ExitTime']= candletime
+                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -267,8 +270,9 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol}"
+                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -279,8 +283,9 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val']=0
                 params['Sl_Val']=0
+                params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol}"
+                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -290,8 +295,9 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol}"
+                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
