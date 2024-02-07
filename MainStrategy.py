@@ -215,7 +215,6 @@ def main_strategy ():
                 params['Quantity']=params['NextOrderQty']
                 params['NextOrderQty'] = float(params['Quantity']) * float(params['QuantityMultiplier'])
                 params['updated_low'] = float(low)
-                params['fixed_high_buy'] = float(high)
                 params['previous_target_val'] = params['updated_low']
                 params['perval'] = params['fixed_high_buy'] - params['updated_low']
                 params['target_val'] = params['perval'] * params['TargetRangePercentage'] * 0.01
@@ -240,7 +239,6 @@ def main_strategy ():
                 params['Quantity'] = params['NextOrderQty']
                 params['NextOrderQty'] = float(params['Quantity']) * float(params['QuantityMultiplier'])
                 params['updated_high'] = float(high)
-                params['fixed_low_sell'] = float(low)
                 params['previous_target_val'] = params['updated_high']
                 params['perval'] = params['updated_high'] - params['fixed_low_sell']
                 params['target_val'] = params['perval']* params['TargetRangePercentage'] * 0.01
@@ -281,7 +279,7 @@ def main_strategy ():
                 params['Sl_Val'] = 0
                 params['Quantity']=float(params['InitialQuantity'] )
                 params['ExitTime']= candletime
-                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
+                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}, high: {params['updated_high'] }, low: {params['fixed_low_sell']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -314,7 +312,7 @@ def main_strategy ():
                 params['Sl_Val']=0
                 params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"
+                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy'] }, low: {params['updated_low']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
