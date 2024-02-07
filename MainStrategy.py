@@ -6,6 +6,12 @@ import pytz
 # timezone = pytz.timezone("Etc/UTC")
 result_dict={}
 
+def is_time_between(start_time, end_time, check_time):
+    start_time = datetime.strptime(start_time, "%H:%M")
+    end_time = datetime.strptime(end_time, "%H:%M")
+    check_time = datetime.strptime(check_time, "%Y-%m-%d %H:%M:%S")
+    return start_time <= check_time <= end_time
+
 def pip_converter():
     pass
 
@@ -36,8 +42,6 @@ def get_user_settings():
                 'RangePercentage': row['RangePercentage'],
                 'Stoploss': row['Stoploss'],
                 'USESL': row['USESL'],
-                'StartTime': row['StartTime'],
-                'StopTime': row['StopTime'],
                 'InitialTrade': None,
                 'previous_target_val':0,
                 'target_val': 0,
@@ -77,7 +81,8 @@ credentials_dict = get_mt5_credentials()
 Login = credentials_dict.get('Login')
 Password = credentials_dict.get('Password')
 Server = credentials_dict.get('Server')
-
+print("StartTime: ",credentials_dict.get('StartTime'))
+print("Stoptime: ",credentials_dict.get('Stoptime'))
 trade.login(Login,Password,Server)
 start_date = datetime.now(timezone.utc) - timedelta(days=1)
 end_date = datetime.now(timezone.utc).replace(hour=17, minute=31, second=0, microsecond=0)
@@ -88,11 +93,9 @@ def takeprofit_calculation(updated_price,tradetype,previous_target_value):
             return previous_target_value
 
         if tradetype == "SHORT":
-
             if updated_price >= previous_target_value:
                 previous_target_value=updated_price
         if tradetype == "BUY":
-
             if updated_price <= previous_target_value:
                 previous_target_value = updated_price
         return previous_target_value
@@ -146,14 +149,23 @@ def main_strategy ():
             low=float(symr_row1['low'])
             close=float(symr_row1['close'])
             candletime=symr_row1['time']
+            candletime = candletime.strftime("%Y-%m-%d %H:%M:%S")
+            # print("candletime: ",candletime)
             diff_to_high = abs(close - high)
             diff_to_low = abs(close - low)
             value_to_compare= high-low
             # //now = datetime.now().time()
             timestamp = datetime.now()
             timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
+            start_time=credentials_dict.get('StartTime')
+            end_time=credentials_dict.get('Stoptime')
 
-            if params['ExitTime'] != candletime and float(value_to_compare) >= candle_range and params['InitialTrade'] == None and diff_to_high < diff_to_low :
+
+            if (
+                    float(value_to_compare) >= candle_range and
+                    params['InitialTrade'] == None and
+                    diff_to_high < diff_to_low
+            ):
                 # open sell
                 params['InitialTrade']="SHORT"
                 params['AveragingStepCount']=params['AveragingStepCount']+1
@@ -165,15 +177,16 @@ def main_strategy ():
                 params['perval']=params['updated_high']-params['fixed_low_sell']
                 params['target_val']= params['perval'] * float(params['TargetRangePercentage'])*0.01
                 params['target_val'] = params['updated_high']-params['target_val']
-
-
-
                 orderlog = f"{timestamp} Short order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 = {params['target_val']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']),MagicNumber= int(params['MagicNumber']))
 
-            if params['ExitTime'] != candletime and float(value_to_compare) >= candle_range and params['InitialTrade'] == None and float(params['NextTradeVal'])>0 and diff_to_high > diff_to_low:
+            if (
+                    float(value_to_compare) >= candle_range and
+                    params['InitialTrade'] == None and
+                    diff_to_high > diff_to_low
+            ):
                 # open buy
                 params['InitialTrade']="BUY"
                 params['AveragingStepCount'] = params['AveragingStepCount'] + 1
@@ -185,14 +198,18 @@ def main_strategy ():
                 params['perval'] = params['fixed_high_buy'] - params['updated_low']
                 params['target_val'] = params['perval']  * float(params['TargetRangePercentage']) * 0.01
                 params['target_val'] = params['updated_low'] + params['target_val']
-
                 orderlog = f"{timestamp} Buy order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 ={params['target_val']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_buy(symbol=symbol, lot=float(params['Quantity']),MagicNumber= int(params['MagicNumber']))
 
 
-            if params['InitialTrade'] == "BUY" and close <= float(params['NextTradeVal']) and float(params['NextTradeVal'])>0 and params['AveragingStepCount'] < NumberOfTrades:
+            if (
+                    params['InitialTrade'] == "BUY" and
+                    close <= float(params['NextTradeVal']) and
+                    float(params['NextTradeVal'])>0 and
+                    params['AveragingStepCount'] < NumberOfTrades
+            ):
                 params['AveragingStepCount']= params['AveragingStepCount'] + 1
                 params['NextTradeVal'] = close - averaging_step
                 params['Quantity']=params['NextOrderQty']
@@ -203,8 +220,6 @@ def main_strategy ():
                 params['perval'] = params['fixed_high_buy'] - params['updated_low']
                 params['target_val'] = params['perval'] * params['TargetRangePercentage'] * 0.01
                 params['target_val'] = params['updated_low'] + params['target_val']
-
-
                 if params['AveragingStepCount'] == NumberOfTrades:
                     params['ActivateSl'] = True
                     params['Sl_Val'] = close - averaging_step
@@ -214,7 +229,12 @@ def main_strategy ():
                 trade.mt_buy(symbol=symbol, lot=float(params['Quantity']),MagicNumber= int(params['MagicNumber']))
 
 
-            if params['InitialTrade'] == "SHORT" and close >= float(params['NextTradeVal']) and float(params['NextTradeVal'])>0 and params['AveragingStepCount'] < NumberOfTrades:
+            if (
+                    params['InitialTrade'] == "SHORT" and
+                    close >= float(params['NextTradeVal']) and
+                    float(params['NextTradeVal'])>0 and
+                    params['AveragingStepCount'] < NumberOfTrades
+            ):
                 params['AveragingStepCount']= params['AveragingStepCount'] + 1
                 params['NextTradeVal'] = close + averaging_step
                 params['Quantity'] = params['NextOrderQty']
@@ -242,19 +262,20 @@ def main_strategy ():
                 params['target_val'] = params['perval'] * params['TargetRangePercentage'] * 0.01
                 params['target_val'] = params['updated_high'] - params['target_val']
 
-
-
             if params['InitialTrade'] == "BUY":
-                params['updated_low'] = float(takeprofit_calculation(updated_price=high, tradetype=params['InitialTrade'],
+                params['updated_low'] = float(takeprofit_calculation(updated_price=low, tradetype=params['InitialTrade'],
                                                                      previous_target_value=params['previous_target_val']))
                 params['previous_target_val'] = params['updated_low']
                 params['perval'] = params['fixed_high_buy'] - params['updated_low']
                 params['target_val'] = params['perval'] * params['TargetRangePercentage'] * 0.01
                 params['target_val'] = params['updated_low'] + params['target_val']
 
-
     #         target and stoploss execution
-            if params['InitialTrade'] == "SHORT" and close <= float(params['target_val']) and float(params['target_val'])>0:
+            if (
+                    params['InitialTrade'] == "SHORT" and
+                    close <= float(params['target_val']) and
+                    float(params['target_val'])>0
+            ):
                 params['InitialTrade'] =None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
@@ -266,7 +287,12 @@ def main_strategy ():
                 open_positions = trade.get_open_position()
                 close_all_sell_orders(open_positions)
 
-            if params['ActivateSl'] == True and params['InitialTrade'] == "SHORT" and  close >= float(params['Sl_Val']) and float(params['Sl_Val'])>0:
+            if (
+                    params['ActivateSl'] == True and
+                    params['InitialTrade'] == "SHORT" and
+                    close >= float(params['Sl_Val']) and
+                    float(params['Sl_Val'])>0
+            ):
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
@@ -278,8 +304,11 @@ def main_strategy ():
                 open_positions = trade.get_open_position()
                 close_all_sell_orders(open_positions)
 
-            if params['InitialTrade'] == "BUY" and close >= float(params['target_val']) and float(
-                params['target_val']) > 0:
+            if (
+                    params['InitialTrade'] == "BUY" and
+                    close >= float(params['target_val']) and
+                    float(params['target_val']) > 0
+            ):
                 params['InitialTrade'] = None
                 params['target_val']=0
                 params['Sl_Val']=0
@@ -291,7 +320,12 @@ def main_strategy ():
                 open_positions = trade.get_open_position()
                 close_all_buy_orders(open_positions)
 
-            if params['ActivateSl'] == True and params['InitialTrade'] == "BUY"and  close <= float(params['Sl_Val']) and float(params['Sl_Val'])>0:
+            if (
+                    params['ActivateSl'] == True and
+                    params['InitialTrade'] == "BUY"and
+                    close <= float(params['Sl_Val']) and
+                    float(params['Sl_Val'])>0
+            ):
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
@@ -302,6 +336,7 @@ def main_strategy ():
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
                 close_all_buy_orders(open_positions)
+
     except Exception as e:
         print("Error happened in Main strategy loop: ", str(e))
 
@@ -320,8 +355,7 @@ def write_to_order_logs(message):
 
 # trade.mt_close_sell(symbol="EURUSD",lot=0.01,orderid=64504309)
 while True:
-
-    main_strategy ()
+    main_strategy()
 
 
 
