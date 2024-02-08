@@ -52,7 +52,7 @@ def get_user_settings():
                 'perval':0,
                 'fixed_low_sell':0,
                 'fixed_high_buy':0,
-                'ExitTime':0,
+                'ExitTime':None,
             }
             result_dict[row['Symbol']] = symbol_dict
         print(result_dict)
@@ -164,7 +164,8 @@ def main_strategy ():
             if (
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
-                    diff_to_high < diff_to_low
+                    diff_to_high < diff_to_low and
+                    params['ExitTime']!=candletime
             ):
                 # open sell
                 params['InitialTrade']="SHORT"
@@ -185,7 +186,8 @@ def main_strategy ():
             if (
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
-                    diff_to_high > diff_to_low
+                    diff_to_high > diff_to_low and
+                    params['ExitTime']!=candletime
             ):
                 # open buy
                 params['InitialTrade']="BUY"
@@ -277,8 +279,12 @@ def main_strategy ():
                 params['InitialTrade'] =None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['updated_low'] =  0
+                params['fixed_high_buy'] =  0
+                params['updated_high'] = 0
+                params['fixed_low_sell'] = 0
                 params['Quantity']=float(params['InitialQuantity'] )
-                params['ExitTime']= candletime
+                params['ExitTime'] = candletime
                 orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}, high: {params['updated_high'] }, low: {params['fixed_low_sell']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
@@ -294,6 +300,10 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['updated_low'] = 0
+                params['fixed_high_buy'] = 0
+                params['updated_high'] = 0
+                params['fixed_low_sell'] = 0
                 params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
                 orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
@@ -310,6 +320,10 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val']=0
                 params['Sl_Val']=0
+                params['updated_low'] = 0
+                params['fixed_high_buy'] = 0
+                params['updated_high'] = 0
+                params['fixed_low_sell'] = 0
                 params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
                 orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy'] }, low: {params['updated_low']}"
@@ -327,6 +341,10 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['updated_low'] = 0
+                params['fixed_high_buy'] = 0
+                params['updated_high'] = 0
+                params['fixed_low_sell'] = 0
                 params['ExitTime'] = candletime
                 params['Quantity'] = float(params['InitialQuantity'])
                 orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"

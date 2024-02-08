@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e7cc47da-0a8b-4538-97b4-9a4a018e1222" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainStrategy.exe" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2c4lfTh0nG4riksh7rxv45QPyoW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e7cc47da-0a8b-4538-97b4-9a4a018e1222" name="Changes" comment="" />
+      <created>1707378836417</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707378836417</updated>
+    </task>
+    <servers />
+  </component>
+</project>
