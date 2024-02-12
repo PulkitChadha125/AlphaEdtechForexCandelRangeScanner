@@ -154,13 +154,22 @@ def main_strategy ():
             high=float(symr_row1['high'])
             low=float(symr_row1['low'])
             close=float(symr_row1['close'])
+
+
+
             candletime=symr_row1['time']
             candletime = candletime.strftime("%Y-%m-%d %H:%M:%S")
             # print("candletime: ",candletime)
             diff_to_high = abs(close - high)
             diff_to_low = abs(close - low)
             value_to_compare= high-low
-            # //now = datetime.now().time()
+            print("Loop Started")
+            print("Symbol = ",symbol )
+            print(" high: ", symr_row1['high'])
+            print(" low: ", symr_row1['low'])
+            print(" Ltp: ",symr_row1['close'] )
+            print( "Time: ",symr_row1['time'])
+            print("Loop Closed")
             timestamp = datetime.now()
             timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
             start_time=credentials_dict.get('StartTime')
@@ -217,6 +226,7 @@ def main_strategy ():
 
             if (
                     params['TradingStatus']=="ENABLE" and
+                    params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "BUY" and
                     close <= float(params['NextTradeVal']) and
                     float(params['NextTradeVal'])>0 and
@@ -241,6 +251,7 @@ def main_strategy ():
 
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "SHORT" and
                     close >= float(params['NextTradeVal']) and
@@ -282,7 +293,7 @@ def main_strategy ():
                 params['target_val'] = params['updated_low'] + params['target_val']
 
     #         target and stoploss execution
-            if (
+            if (params['TradingStatus']=="ENABLE" and
                     params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "SHORT" and
                     close <= float(params['target_val']) and
@@ -372,10 +383,10 @@ def main_strategy ():
                 open_positions = trade.get_open_position()
                 close_all_buy_orders(open_positions)
 
-            combined_pnl=trade.get_mtm()
+            combined_pnl=float(trade.get_mtm())
 
             if switch == "TRUE" and combined_pnl >= MaxProfit:
-                orderlog = f"{timestamp} Max Profit acheived closing all open position no more trade will be taken "
+                orderlog = f"{timestamp} Max Profit acheived closing all open position no more trade will be taken {combined_pnl} "
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -387,7 +398,7 @@ def main_strategy ():
 
 
             if switch == "TRUE" and combined_pnl <= MaxLoss:
-                orderlog = f"{timestamp} Max loss acheived closing all open position no more trade will be taken "
+                orderlog = f"{timestamp} Max loss acheived closing all open position no more trade will be taken {combined_pnl}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()

@@ -23,9 +23,7 @@ def get_mtm():
         # Calculate the combined PnL
         combined_pnl = sum(position.profit for position in open_positions)
 
-        # Display individual PnL for each position
-        for position in open_positions:
-            print(f"Ticket: {position.ticket}, PnL: {position.profit}")
+
 
         # Display the combined PnL
         print("Combined PnL:", combined_pnl)
@@ -61,7 +59,7 @@ def get_data(symbol, timeframe):
 def get_open_position():
     try:
         result=mt.positions_get()
-        print(result)
+
         return result
     except Exception as e:
         print("An error occurred while fetching open position:", str(e))
