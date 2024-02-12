@@ -3,9 +3,9 @@ from datetime import datetime
 import pandas as pd
 import pytz
 
-Login=1075557
-Password="Forex@123"
-Server="VantageInternational-Demo"
+# Login=1075557
+# Password="Forex@123"
+# Server="VantageInternational-Demo"
 
 
 def login (Login,Password,Server):
@@ -15,6 +15,25 @@ def login (Login,Password,Server):
     except Exception as e:
         print("An error occurred while login:", str(e))
 
+def get_mtm():
+    try:
+        # Assuming get_open_position() returns the list of TradePosition objects
+        open_positions = get_open_position()
+
+        # Calculate the combined PnL
+        combined_pnl = sum(position.profit for position in open_positions)
+
+        # Display individual PnL for each position
+        for position in open_positions:
+            print(f"Ticket: {position.ticket}, PnL: {position.profit}")
+
+        # Display the combined PnL
+        print("Combined PnL:", combined_pnl)
+
+        return combined_pnl
+
+    except Exception as e:
+        print("An error occurred while fetching open position:", str(e))
 
 
 def get_data(symbol, timeframe):

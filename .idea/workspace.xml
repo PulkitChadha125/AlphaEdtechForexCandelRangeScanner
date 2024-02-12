@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7cc47da-0a8b-4538-97b4-9a4a018e1222" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT5Credentials.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Credentials.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT5Integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Integration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MachineLogs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MachineLogs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.exe" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSettings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSettings.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" afterDir="false" />
@@ -24,22 +27,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2c4lfTh0nG4riksh7rxv45QPyoW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.MainStrategy.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

@@ -15,3 +15,26 @@
 07/02/2024 20:26:48 Short order executed for XAUUSD for lotsize= 1.0  @ 2042.34 ,Step = 7,Target1 = 2042.31
 07/02/2024 20:26:50 Target Executed For Short Trade All Position Exited @ XAUUSD @ price 2042.25, high: 2042.86, low: 2041.76
 07/02/2024 20:26:50 Buy order executed for XAUUSD for lotsize= 1.0  @ 2042.25 ,Step = 8,Target1 =2042.31
+08/02/2024 19:59:27 Buy order executed for XAUUSD for lotsize= 1  @ 2031.13 ,Step = 1,Target1 =2031.625
+08/02/2024 19:59:27 Buy order executed for XAUUSD for lotsize= 2.0  @ 2027.6 ,Step = 2,Target =2028.295
+08/02/2024 19:59:57 Target Executed For Buy Trade All Position Exited @ XAUUSD @ price 2028.38, high: 0, low: 0
+08/02/2024 20:01:12 Short order executed for XAUUSD for lotsize= 1.0  @ 2029.65 ,Step = 3,Target1 = 2029.085
+08/02/2024 20:01:14 Short order executed for XAUUSD for lotsize= 2.0  @ 2030.69 ,Step = 4,Target =2029.5500000000002
+08/02/2024 20:02:44 Short order executed for XAUUSD for lotsize= 4.0  @ 2031.81 ,Step = 5,Target =2030.105
+08/02/2024 20:03:51 Short order executed for XAUUSD for lotsize= 8.0  @ 2032.83 ,Step = 6,Target =2030.615
+08/02/2024 20:04:07 Short order executed for XAUUSD for lotsize= 16.0  @ 2033.93 ,Step = 7,Target =2031.165
+08/02/2024 20:04:46 Target Executed For Short Trade All Position Exited @ XAUUSD @ price 2031.19, high: 0, low: 0
+08/02/2024 20:05:09 Buy order executed for XAUUSD for lotsize= 1.0  @ 2030.3 ,Step = 8,Target1 =2030.815
+08/02/2024 20:05:26 Target Executed For Buy Trade All Position Exited @ XAUUSD @ price 2030.9, high: 0, low: 0
+08/02/2024 20:10:41 Buy order executed for XAUUSD for lotsize= 1.0  @ 2030.06 ,Step = 9,Target1 =2030.6100000000001
+08/02/2024 20:12:01 Buy order executed for XAUUSD for lotsize= 2.0  @ 2029.02 ,Step = 10,Target =2030.0900000000001
+08/02/2024 20:13:01 Target Executed For Buy Trade All Position Exited @ XAUUSD @ price 2029.96, high: 0, low: 0
+08/02/2024 20:15:55 Short order executed for XAUUSD for lotsize= 1.0  @ 2030.62 ,Step = 11,Target1 = 2030.12
+08/02/2024 20:17:11 Target Executed For Short Trade All Position Exited @ XAUUSD @ price 2030.53, high: 0, low: 0
+08/02/2024 20:21:30 Buy order executed for XAUUSD for lotsize= 1.0  @ 2029.77 ,Step = 12,Target1 =2030.27
+08/02/2024 20:26:10 Target Executed For Buy Trade All Position Exited @ XAUUSD @ price 2029.52, high: 0, low: 0
+08/02/2024 20:30:43 Short order executed for XAUUSD for lotsize= 1.0  @ 2029.45 ,Step = 13,Target1 = 2028.9450000000002
+08/02/2024 20:30:59 Target Executed For Short Trade All Position Exited @ XAUUSD @ price 2028.89, high: 0, low: 0
+08/02/2024 21:28:00 Short order executed for XAUUSD for lotsize= 1  @ 2032.44 ,Step = 1,Target1 = 2032.24
+08/02/2024 21:28:05 Short order executed for XAUUSD for lotsize= 1  @ 2032.31 ,Step = 1,Target1 = 2032.24
+08/02/2024 21:28:10 Target Executed For Short Trade All Position Exited @ XAUUSD @ price 2032.23, high: 2033.17, low: 2031.31

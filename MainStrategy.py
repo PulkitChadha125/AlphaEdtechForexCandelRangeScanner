@@ -53,6 +53,8 @@ def get_user_settings():
                 'fixed_low_sell':0,
                 'fixed_high_buy':0,
                 'ExitTime':None,
+                'TradingStatus':row['TradingStatus'],
+
             }
             result_dict[row['Symbol']] = symbol_dict
         print(result_dict)
@@ -81,6 +83,10 @@ credentials_dict = get_mt5_credentials()
 Login = credentials_dict.get('Login')
 Password = credentials_dict.get('Password')
 Server = credentials_dict.get('Server')
+switch= credentials_dict.get('UseRisk')
+print(switch)
+MaxLoss=float(credentials_dict.get('MaxLoss'))
+MaxProfit=float(credentials_dict.get('MaxProfit'))
 print("StartTime: ",credentials_dict.get('StartTime'))
 print("Stoptime: ",credentials_dict.get('Stoptime'))
 trade.login(Login,Password,Server)
@@ -161,7 +167,8 @@ def main_strategy ():
             end_time=credentials_dict.get('Stoptime')
 
 
-            if (
+            if (    start_time <= candletime <= end_time and
+                    params['TradingStatus']=="ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
                     diff_to_high < diff_to_low and
@@ -184,6 +191,8 @@ def main_strategy ():
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']),MagicNumber= int(params['MagicNumber']))
 
             if (
+                    start_time <= candletime <= end_time and
+                    params['TradingStatus']=="ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
                     diff_to_high > diff_to_low and
@@ -207,6 +216,7 @@ def main_strategy ():
 
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "BUY" and
                     close <= float(params['NextTradeVal']) and
                     float(params['NextTradeVal'])>0 and
@@ -231,6 +241,7 @@ def main_strategy ():
 
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "SHORT" and
                     close >= float(params['NextTradeVal']) and
                     float(params['NextTradeVal'])>0 and
@@ -272,6 +283,7 @@ def main_strategy ():
 
     #         target and stoploss execution
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "SHORT" and
                     close <= float(params['target_val']) and
                     float(params['target_val'])>0
@@ -279,19 +291,21 @@ def main_strategy ():
                 params['InitialTrade'] =None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
-                params['updated_low'] =  0
-                params['fixed_high_buy'] =  0
-                params['updated_high'] = 0
-                params['fixed_low_sell'] = 0
                 params['Quantity']=float(params['InitialQuantity'] )
                 params['ExitTime'] = candletime
+                params['AveragingStepCount'] = 0
                 orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}, high: {params['updated_high'] }, low: {params['fixed_low_sell']}"
+                params['updated_low'] = 0
+                params['fixed_high_buy'] = 0
+                params['updated_high'] = 0
+                params['fixed_low_sell'] = 0
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
                 close_all_sell_orders(open_positions)
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['ActivateSl'] == True and
                     params['InitialTrade'] == "SHORT" and
                     close >= float(params['Sl_Val']) and
@@ -300,19 +314,21 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['ExitTime'] = candletime
+                params['AveragingStepCount'] = 0
+                params['Quantity'] = float(params['InitialQuantity'])
+                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
                 params['fixed_low_sell'] = 0
-                params['ExitTime'] = candletime
-                params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
                 close_all_sell_orders(open_positions)
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['InitialTrade'] == "BUY" and
                     close >= float(params['target_val']) and
                     float(params['target_val']) > 0
@@ -320,19 +336,21 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val']=0
                 params['Sl_Val']=0
+                params['ExitTime'] = candletime
+                params['AveragingStepCount'] = 0
+                params['Quantity'] = float(params['InitialQuantity'])
+                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy'] }, low: {params['updated_low']}"
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
                 params['fixed_low_sell'] = 0
-                params['ExitTime'] = candletime
-                params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy'] }, low: {params['updated_low']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
                 close_all_buy_orders(open_positions)
 
             if (
+                    params['TradingStatus']=="ENABLE" and
                     params['ActivateSl'] == True and
                     params['InitialTrade'] == "BUY"and
                     close <= float(params['Sl_Val']) and
@@ -341,17 +359,49 @@ def main_strategy ():
                 params['InitialTrade'] = None
                 params['target_val'] = 0
                 params['Sl_Val'] = 0
+                params['ExitTime'] = candletime
+                params['AveragingStepCount']=0
+                params['Quantity'] = float(params['InitialQuantity'])
+                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
                 params['fixed_low_sell'] = 0
-                params['ExitTime'] = candletime
-                params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
                 close_all_buy_orders(open_positions)
+
+            combined_pnl=trade.get_mtm()
+
+            if switch == "TRUE" and combined_pnl >= MaxProfit:
+                orderlog = f"{timestamp} Max Profit acheived closing all open position no more trade will be taken "
+                print(orderlog)
+                write_to_order_logs(orderlog)
+                open_positions = trade.get_open_position()
+                close_all_buy_orders(open_positions)
+                open_positions = trade.get_open_position()
+                close_all_sell_orders(open_positions)
+                for symbol, VARAM in result_dict.items():
+                    VARAM['TradingStatus'] = "DISABLE"
+
+
+            if switch == "TRUE" and combined_pnl <= MaxLoss:
+                orderlog = f"{timestamp} Max loss acheived closing all open position no more trade will be taken "
+                print(orderlog)
+                write_to_order_logs(orderlog)
+                open_positions = trade.get_open_position()
+                close_all_buy_orders(open_positions)
+                open_positions = trade.get_open_position()
+                close_all_buy_orders(open_positions)
+                open_positions = trade.get_open_position()
+                close_all_sell_orders(open_positions)
+
+                for symbol, VARAM in result_dict.items():
+                    VARAM['TradingStatus'] = "DISABLE"
+
+
+
 
     except Exception as e:
         print("Error happened in Main strategy loop: ", str(e))
