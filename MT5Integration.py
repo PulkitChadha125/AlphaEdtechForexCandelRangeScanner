@@ -1,12 +1,14 @@
 import MetaTrader5 as mt
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 import pytz
-
+import traceback
 # Login=1075557
 # Password="Forex@123"
 # Server="VantageInternational-Demo"
-
+def write_to_order_logs(message):
+    with open('MachineLogs.txt', 'a') as file:  # Open the file in append mode
+        file.write(message + '\n')
 
 def login (Login,Password,Server):
     try:
@@ -34,6 +36,18 @@ def get_mtm():
         print("An error occurred while fetching open position:", str(e))
 
 
+def convert_to_broker_time():
+    # Define time zones
+    ist_timezone = pytz.timezone('Asia/Kolkata')  # Indian Standard Time
+    current_time_ist = datetime.now(ist_timezone)
+    print(current_time_ist)
+    broker_time_difference = timedelta(hours=-3, minutes=-30)
+    broker_time = current_time_ist + broker_time_difference
+
+    return broker_time
+
+
+
 def get_data(symbol, timeframe):
     try:
         if timeframe=='TIMEFRAME_M1':
@@ -47,13 +61,23 @@ def get_data(symbol, timeframe):
 
         # mt.TIMEFRAME_M1
         start_date = datetime.now(pytz.timezone("Etc/UTC")) - pd.DateOffset(days=1)
-        end_date = datetime.now(pytz.timezone("Etc/UTC")).replace(hour=datetime.now().hour, minute=datetime.now().minute, second=0, microsecond=0)
-        OHLC_DATA = pd.DataFrame(mt.copy_rates_range(symbol, timeframe, start_date, end_date)).tail(3)
+        end_date = datetime.now(pytz.timezone("Etc/UTC")).replace(hour=datetime.now().hour, minute=datetime.now().minute, second=datetime.now().second, microsecond=0)
+        # broker_time = convert_to_broker_time()
+        #
+        # start_date=broker_time-timedelta(days=1)
+        # end_date=broker_time
+        print("start_date: ", start_date)
+        print("end_date: ",end_date)
+        OHLC_DATA = pd.DataFrame(mt.copy_rates_range(symbol, timeframe, start_date, end_date))
         OHLC_DATA['time'] = pd.to_datetime(OHLC_DATA['time'], unit='s')
+
+
+        OHLC_DATA.to_csv("data.csv")
 
         return OHLC_DATA
     except Exception as e:
         print("An error occurred while fetching data:", str(e))
+        traceback.print_exc()
 
 
 def get_open_position():
@@ -90,8 +114,11 @@ def mt_buy(symbol,lot,MagicNumber):
         }
         result = mt.order_send(request)
         print("result: ",result)
+
+        write_to_order_logs(result)
     except Exception as e:
         print(" error occurred while placing buy order:", str(e))
+        write_to_order_logs(str(e))
 
 
 
@@ -115,10 +142,12 @@ def mt_short(symbol,lot,MagicNumber):
         }
         result = mt.order_send(request)
         print("result: ", result)
+        write_to_order_logs(result)
     except Exception as e:
         print(" error occurred while placing sell order:", str(e))
+        write_to_order_logs(str(e))
 
-def mt_close_buy(symbol,lot,orderid):
+def mt_close_buy(symbol,lot,orderid,timestamp):
     try:
         price = mt.symbol_info_tick(symbol).bid
         request = {
@@ -134,11 +163,15 @@ def mt_close_buy(symbol,lot,orderid):
         }
         result = mt.order_send(request)
         print(result)
+        orderlog = f"{timestamp} {result}"
+        print(orderlog)
+        write_to_order_logs(orderlog)
     except Exception as e:
         print(" error occurred while closing buy order:", str(e))
+        write_to_order_logs(str(e))
 
 
-def mt_close_sell(symbol,lot,orderid):
+def mt_close_sell(symbol,lot,orderid,timestamp):
     try:
         price = mt.symbol_info_tick(symbol).ask
         request = {
@@ -154,8 +187,12 @@ def mt_close_sell(symbol,lot,orderid):
         }
         result = mt.order_send(request)
         print(result)
+        orderlog = f"{timestamp} {result}"
+        print(orderlog)
+        write_to_order_logs(orderlog)
     except Exception as e:
         print(" error occurred while closing sell order:", str(e))
+        write_to_order_logs(str(e))
 
 
 

@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e7cc47da-0a8b-4538-97b4-9a4a018e1222" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT5Credentials.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Credentials.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MT5Integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Integration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MachineLogs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MachineLogs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.exe" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSettings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSettings.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" afterDir="false" />
@@ -36,14 +38,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.MainStrategy.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.MT5Integration.executor": "Run",
+    "Python.MainStrategy.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
