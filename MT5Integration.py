@@ -46,7 +46,27 @@ def convert_to_broker_time():
 
     return broker_time
 
+def getdata_ver2(symbol, timeframe):
+    try:
+        if timeframe=='TIMEFRAME_M1':
+            timeframe=mt.TIMEFRAME_M1
+        elif timeframe=='TIMEFRAME_M2':
+            timeframe=mt.TIMEFRAME_M2
+        elif timeframe=='TIMEFRAME_M5':
+            timeframe=mt.TIMEFRAME_M5
+        elif timeframe=='TIMEFRAME_M15':
+            timeframe=mt.TIMEFRAME_M15
 
+        start_date = datetime.now(pytz.timezone("Etc/UTC")) - pd.DateOffset(days=1)
+        print("start_date 2: ",start_date)
+
+        OHLC_DATA = pd.DataFrame(mt.copy_rates_from(symbol, timeframe, start_date, 5000)).tail(3)
+        OHLC_DATA['time'] = pd.to_datetime(OHLC_DATA['time'], unit='s')
+        OHLC_DATA.to_csv("data.csv")
+
+    except Exception as e:
+        print("An error occurred while fetching data:", str(e))
+        traceback.print_exc()
 
 def get_data(symbol, timeframe):
     try:
@@ -59,25 +79,69 @@ def get_data(symbol, timeframe):
         elif timeframe=='TIMEFRAME_M15':
             timeframe=mt.TIMEFRAME_M15
 
-        # mt.TIMEFRAME_M1
-        start_date = datetime.now(pytz.timezone("Etc/UTC")) - pd.DateOffset(days=1)
-        end_date = datetime.now(pytz.timezone("Etc/UTC")).replace(hour=datetime.now().hour, minute=datetime.now().minute, second=datetime.now().second, microsecond=0)
-        # broker_time = convert_to_broker_time()
-        #
-        # start_date=broker_time-timedelta(days=1)
-        # end_date=broker_time
-        print("start_date: ", start_date)
-        print("end_date: ",end_date)
-        OHLC_DATA = pd.DataFrame(mt.copy_rates_range(symbol, timeframe, start_date, end_date))
-        OHLC_DATA['time'] = pd.to_datetime(OHLC_DATA['time'], unit='s')
+        candle_data = mt.copy_rates_from_pos(symbol, mt.TIMEFRAME_M5, 0, 1)
 
-
-        OHLC_DATA.to_csv("data.csv")
-
-        return OHLC_DATA
+        return candle_data
     except Exception as e:
         print("An error occurred while fetching data:", str(e))
         traceback.print_exc()
+
+def checking ():
+    candle_data = mt.copy_rates_from_pos("XAUUSD", mt.TIMEFRAME_M5, 0, 1)
+    print("candle_data: ",candle_data)
+    timestamp = candle_data[0][0]
+    print("Unix Timestamp:", timestamp)
+    human_readable_time = datetime.fromtimestamp(timestamp, pytz.timezone("Europe/Athens"))
+    print("Human Readable Time:", human_readable_time)
+
+
+
+
+
+
+
+
+
+# def get_data(symbol, timeframe):
+#
+#     try:
+#         if timeframe=='TIMEFRAME_M1':
+#             timeframe=mt.TIMEFRAME_M1
+#         elif timeframe=='TIMEFRAME_M2':
+#             timeframe=mt.TIMEFRAME_M2
+#         elif timeframe=='TIMEFRAME_M5':
+#             timeframe=mt.TIMEFRAME_M5
+#         elif timeframe=='TIMEFRAME_M15':
+#             timeframe=mt.TIMEFRAME_M15
+#
+#
+#
+#
+#         end_date = datetime.now(pytz.timezone("Etc/UTC")).replace(hour=datetime.now().hour, minute=datetime.now().minute, second=datetime.now().second, microsecond=0)
+#         end_date_utc = datetime.now(pytz.timezone("Etc/UTC"))
+#
+#         start_date = end_date_utc.astimezone(
+#             pytz.timezone("Europe/Athens")) - timedelta(hours=5)
+#         end_date_gmt2 = end_date_utc.astimezone(
+#             pytz.timezone("Europe/Athens"))  # Replace "Europe/Athens" with the desired timezone
+#
+#         # Convert end_date to GMT+3
+#         end_date_gmt3 = end_date_utc.astimezone(
+#             pytz.timezone("Europe/Istanbul"))  # Replace "Europe/Istanbul" with the desired timezone
+#
+#         # print("end_date (UTC): ", end_date_utc)
+#         print("start_date (GMT+2): ", start_date)
+#         print("end_date (GMT+2): ", end_date_gmt2)
+#         print("end_date (GMT+3): ", end_date_gmt3)
+#
+#
+#         OHLC_DATA = pd.DataFrame(mt.copy_rates_range(symbol, timeframe, start_date, end_date_gmt3))
+#         OHLC_DATA['time'] = pd.to_datetime(OHLC_DATA['time'], unit='s')
+#         OHLC_DATA.to_csv("data.csv")
+#         return OHLC_DATA
+#     except Exception as e:
+#         print("An error occurred while fetching data:", str(e))
+#         traceback.print_exc()
 
 
 def get_open_position():

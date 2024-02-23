@@ -9,17 +9,9 @@
       <change beforePath="$PROJECT_DIR$/MT5Credentials.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Credentials.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MT5Integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Integration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MachineLogs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MachineLogs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainStrategy.exe" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradeSettings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSettings.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/warn-MainStrategy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/warn-MainStrategy.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MainStrategy/xref-MainStrategy.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/xref-MainStrategy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

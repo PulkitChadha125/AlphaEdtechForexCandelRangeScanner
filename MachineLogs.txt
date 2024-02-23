@@ -1,2 +1,5 @@
-20/02/2024 12:56:22 Short order executed for BTCUSD for lotsize= 0.25  @ 52029.38 ,Step = 1,Target1 = 52028.055 and servertime = 2024-02-19 07:40:00
+23/02/2024 15:02:39 Short order executed for BTCUSD for lotsize= 1  @ 50986.18 ,Step = 1,Target1 = 50948.25 
 can only concatenate tuple (not "str") to tuple
+23/02/2024 15:03:40 Target Executed For Short Trade All Position Exited @ BTCUSD @ price 50949.39, high: 51003.76, low: 50905.16 
+23/02/2024 15:03:40 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =436583487
+23/02/2024 15:03:40 OrderSendResult(retcode=10009, deal=284746732, order=436584966, volume=1.0, price=50973.71, bid=50949.39, ask=50973.71, comment='python  close se', request_id=969645889, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=50973.71, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=436583487, position_by=0))

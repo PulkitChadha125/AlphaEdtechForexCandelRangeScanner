@@ -1,3 +1,5 @@
+import time
+import traceback
 import pandas as pd
 from pathlib import Path
 import MT5Integration as trade
@@ -8,12 +10,10 @@ import pytz
 result_dict = {}
 
 
-def is_time_between(start_time, end_time, check_time):
-    start_time = datetime.strptime(start_time, "%H:%M")
-    end_time = datetime.strptime(end_time, "%H:%M")
-    check_time = datetime.strptime(check_time, "%Y-%m-%d %H:%M:%S")
-    return start_time <= check_time <= end_time
+vantage_timezone ="GMT"
+exceness="Etc/UTC"
 
+timezoneused=exceness
 
 def pip_converter():
     pass
@@ -66,7 +66,6 @@ def get_user_settings():
 
 
 get_user_settings()
-
 
 def get_mt5_credentials():
     credentials = {}
@@ -154,29 +153,9 @@ def close_all_sell_orders(trade_positions, symbol):
         print("Error happened in Closing sell position", str(e))
 
 
-def checking():
-    global result_dict
-    try:
-        for symbol, params in result_dict.items():
-            time_frame = params['TimeFrame']
-            candle_range = float(params['CandleRange'])
-            averaging_step = float(params['AveragingStep'])
-            NumberOfTrades = int(params['NumberOfTrades'])
-            symr = trade.get_data(symbol=symbol, timeframe=time_frame)
-            symr_row3 = symr.iloc[0]
-            symr_row2 = symr.iloc[1]
-            symr_row1 = symr.iloc[2]
-            high = float(symr_row1['high'])
-            low = float(symr_row1['low'])
-            close = float(symr_row1['close'])
-            print("Loop Started")
-            print("Symbol = ", symbol)
-            print(" Ltp: ", close)
-            print("Time: ", symr_row1['time'])
-            print("Loop Closed")
-    except Exception as e:
-        print("Error happened in Main strategy loop: ", str(e))
 
+
+# trade.get_data(symbol="AMZN",timeframe="TIMEFRAME_M5")
 
 def main_strategy():
     global result_dict
@@ -187,32 +166,33 @@ def main_strategy():
             averaging_step = float(params['AveragingStep'])
             NumberOfTrades = int(params['NumberOfTrades'])
             symr = trade.get_data(symbol=symbol, timeframe=time_frame)
-            symr_row3 = symr.iloc[0]
-            symr_row2 = symr.iloc[1]
-            symr_row1 = symr.iloc[2]
-            high = float(symr_row1['high'])
-            low = float(symr_row1['low'])
-            close = float(symr_row1['close'])
+            open=float(symr[0][1])
+            high =float(symr[0][2])
+            low =float(symr[0][3])
+            close =float(symr[0][4])
 
-            candletime = symr_row1['time']
-            candletime = candletime.strftime("%Y-%m-%d %H:%M:%S")
-            # print("candletime: ",candletime)
+            candletime  = symr[0][0]
+            print(candletime)
+            print(timezoneused)
+            candletime = datetime.fromtimestamp(candletime, pytz.timezone(timezoneused))
             diff_to_high = abs(close - high)
             diff_to_low = abs(close - low)
             value_to_compare = high - low
-            print("Loop Started")
+            # print("Loop Started")
             print("Symbol = ", symbol)
-            print(" high: ", symr_row1['high'])
-            print(" low: ", symr_row1['low'])
-            print(" Ltp: ", symr_row1['close'])
-            print("Time: ", symr_row1['time'])
-            print("Loop Closed")
+            print("Time: ",candletime)
             timestamp = datetime.now()
             timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
-            start_time = credentials_dict.get('StartTime')
-            end_time = credentials_dict.get('Stoptime')
+            current_time_gmt = datetime.now(pytz.timezone("GMT"))
+            start_time_str = credentials_dict.get('StartTime')
+            start_time = datetime.strptime(start_time_str, "%H:%M")
+            start_time = start_time.replace(year=current_time_gmt.year, month=current_time_gmt.month,
+                                            day=current_time_gmt.day)
+            start_time = start_time.replace(tzinfo=pytz.timezone(timezoneused))
 
-            if (start_time <= candletime and
+
+            if (
+                    start_time>candletime and
                     params['TradingStatus'] == "ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
@@ -230,13 +210,13 @@ def main_strategy():
                 params['perval'] = params['updated_high'] - params['fixed_low_sell']
                 params['target_val'] = params['perval'] * float(params['TargetRangePercentage']) * 0.01
                 params['target_val'] = params['updated_high'] - params['target_val']
-                orderlog = f"{timestamp} Short order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 = {params['target_val']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Short order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 = {params['target_val']} "
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']), MagicNumber=int(params['MagicNumber']))
 
             if (
-                    start_time <= candletime and
+                    start_time > candletime and
                     params['TradingStatus'] == "ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
@@ -254,7 +234,7 @@ def main_strategy():
                 params['perval'] = params['fixed_high_buy'] - params['updated_low']
                 params['target_val'] = params['perval'] * float(params['TargetRangePercentage']) * 0.01
                 params['target_val'] = params['updated_low'] + params['target_val']
-                orderlog = f"{timestamp} Buy order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 ={params['target_val']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Buy order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target1 ={params['target_val']} "
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_buy(symbol=symbol, lot=float(params['Quantity']), MagicNumber=int(params['MagicNumber']))
@@ -279,7 +259,7 @@ def main_strategy():
                 if params['AveragingStepCount'] == NumberOfTrades:
                     params['ActivateSl'] = True
                     params['Sl_Val'] = close - averaging_step
-                orderlog = f"{timestamp} Buy order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target ={params['target_val']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Buy order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target ={params['target_val']} "
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_buy(symbol=symbol, lot=float(params['Quantity']), MagicNumber=int(params['MagicNumber']))
@@ -304,7 +284,7 @@ def main_strategy():
                 if params['AveragingStepCount'] == NumberOfTrades:
                     params['ActivateSl'] = True
                     params['Sl_Val'] = close + averaging_step
-                orderlog = f"{timestamp} Short order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target ={params['target_val']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Short order executed for {symbol} for lotsize= {params['Quantity']}  @ {close} ,Step = {params['AveragingStepCount']},Target ={params['target_val']}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']), MagicNumber=int(params['MagicNumber']))
@@ -341,7 +321,7 @@ def main_strategy():
                 params['Quantity'] = float(params['InitialQuantity'])
                 params['ExitTime'] = candletime
                 params['AveragingStepCount'] = 0
-                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}, high: {params['updated_high']}, low: {params['fixed_low_sell']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Target Executed For Short Trade All Position Exited @ {symbol} @ price {close}, high: {params['updated_high']}, low: {params['fixed_low_sell']} "
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
@@ -364,7 +344,7 @@ def main_strategy():
                 params['ExitTime'] = candletime
                 params['AveragingStepCount'] = 0
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close} and servertime = {symr_row1['time']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Stoploss Executed For Short Trade All Position Exited @ {symbol} @ price {close} "
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
@@ -386,7 +366,7 @@ def main_strategy():
                 params['ExitTime'] = candletime
                 params['AveragingStepCount'] = 0
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy']}, low: {params['updated_low']} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Target Executed For Buy Trade All Position Exited @ {symbol} @ price {close}, high: {params['fixed_high_buy']}, low: {params['updated_low']} "
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
@@ -409,7 +389,7 @@ def main_strategy():
                 params['ExitTime'] = candletime
                 params['AveragingStepCount'] = 0
                 params['Quantity'] = float(params['InitialQuantity'])
-                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Stoploss Executed For Buy Trade All Position Exited @ {symbol} @ price {close} "
                 params['updated_low'] = 0
                 params['fixed_high_buy'] = 0
                 params['updated_high'] = 0
@@ -422,7 +402,7 @@ def main_strategy():
             combined_pnl = float(trade.get_mtm())
 
             if switch == "TRUE" and combined_pnl >= MaxProfit:
-                orderlog = f"{timestamp} Max Profit acheived closing all open position no more trade will be taken {combined_pnl} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Max Profit acheived closing all open position no more trade will be taken {combined_pnl}"
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -433,7 +413,7 @@ def main_strategy():
                     VARAM['TradingStatus'] = "DISABLE"
 
             if switch == "TRUE" and combined_pnl <= MaxLoss:
-                orderlog = f"{timestamp} Max loss acheived closing all open position no more trade will be taken {combined_pnl} and servertime = {symr_row1['time']}"
+                orderlog = f"{timestamp} Max loss acheived closing all open position no more trade will be taken {combined_pnl} "
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
@@ -448,20 +428,28 @@ def main_strategy():
 
 
 
+
+
     except Exception as e:
         print("Error happened in Main strategy loop: ", str(e))
+        traceback.print_exc()
 
 
 def write_to_order_logs(message):
     with open('MachineLogs.txt', 'a') as file:  # Open the file in append mode
         file.write(message + '\n')
+#
+# trade.getdata_ver2(symbol="XAUUSD", timeframe="TIMEFRAME_M5")
+# trade.get_data(symbol="XAUUSD", timeframe="TIMEFRAME_M5")
+#
 
 
 # trade.mt_buy(symbol="EURUSD",lot=0.01,MagicNumber=12345)
-
 # trade.mt_close_sell(symbol="EURUSD",lot=0.01,orderid=64504309)
 while True:
     main_strategy()
+
+
 
 
 
