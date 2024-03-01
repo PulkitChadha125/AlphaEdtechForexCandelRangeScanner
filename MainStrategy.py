@@ -8,15 +8,13 @@ import pytz
 
 # timezone = pytz.timezone("Etc/UTC")
 result_dict = {}
-
+current_date = datetime.today()
+last_run_date=current_date - timedelta(days=1)
 
 vantage_timezone ="GMT"
 exceness="Etc/UTC"
 
 timezoneused=exceness
-
-def pip_converter():
-    pass
 
 
 def get_user_settings():
@@ -94,7 +92,6 @@ print(switch)
 MaxLoss = float(credentials_dict.get('MaxLoss'))
 MaxProfit = float(credentials_dict.get('MaxProfit'))
 print("StartTime: ", credentials_dict.get('StartTime'))
-print("Stoptime: ", credentials_dict.get('Stoptime'))
 trade.login(Login, Password, Server)
 start_date = datetime.now(timezone.utc) - timedelta(days=1)
 end_date = datetime.now(timezone.utc).replace(hour=17, minute=31, second=0, microsecond=0)
@@ -132,6 +129,37 @@ def close_all_buy_orders(trade_positions, symbol):
     except Exception as e:
         print("Error happened in Closing buy position", str(e))
 
+def close_buy_allposition(trade_positions):
+    try:
+        for position in trade_positions:
+            ticket_value = position.ticket
+            symbol_value = position.symbol
+            volume_value = position.volume
+            timestamp = datetime.now()
+            timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
+            orderlog = f"{timestamp} Target Executed For buy Trade @ {symbol_value} @ {volume_value} order no ={ticket_value}"
+            print(orderlog)
+            write_to_order_logs(orderlog)
+            trade.mt_close_buy(symbol=symbol_value, lot=volume_value, orderid=ticket_value, timestamp=timestamp)
+    except Exception as e:
+        print("Error happened in Closing buy position", str(e))
+
+def close_sell_allposition(trade_positions):
+    try:
+        for position in trade_positions:
+
+            ticket_value = position.ticket
+            symbol_value = position.symbol
+            volume_value = position.volume
+
+            timestamp = datetime.now()
+            timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
+            orderlog = f"{timestamp} Target Executed For buy Trade @ {symbol_value} @ {volume_value} order no ={ticket_value}"
+            print(orderlog)
+            write_to_order_logs(orderlog)
+            trade.mt_close_sell(symbol=symbol_value, lot=volume_value, orderid=ticket_value, timestamp=timestamp)
+    except Exception as e:
+        print("Error happened in Closing sell position", str(e))
 
 def close_all_sell_orders(trade_positions, symbol):
     try:
@@ -162,6 +190,8 @@ def main_strategy():
     try:
         for symbol, params in result_dict.items():
             time_frame = params['TimeFrame']
+            timestamp = datetime.now()
+            timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
             candle_range = float(params['CandleRange'])
             averaging_step = float(params['AveragingStep'])
             NumberOfTrades = int(params['NumberOfTrades'])
@@ -181,18 +211,10 @@ def main_strategy():
             # print("Loop Started")
             print("Symbol = ", symbol)
             print("Time: ",candletime)
-            timestamp = datetime.now()
-            timestamp = timestamp.strftime("%d/%m/%Y %H:%M:%S")
-            current_time_gmt = datetime.now(pytz.timezone("GMT"))
-            start_time_str = credentials_dict.get('StartTime')
-            start_time = datetime.strptime(start_time_str, "%H:%M")
-            start_time = start_time.replace(year=current_time_gmt.year, month=current_time_gmt.month,
-                                            day=current_time_gmt.day)
-            start_time = start_time.replace(tzinfo=pytz.timezone(timezoneused))
 
 
             if (
-                    start_time>candletime and
+
                     params['TradingStatus'] == "ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
@@ -216,7 +238,7 @@ def main_strategy():
                 trade.mt_short(symbol=symbol, lot=float(params['Quantity']), MagicNumber=int(params['MagicNumber']))
 
             if (
-                    start_time > candletime and
+
                     params['TradingStatus'] == "ENABLE" and
                     float(value_to_compare) >= candle_range and
                     params['InitialTrade'] == None and
@@ -406,9 +428,9 @@ def main_strategy():
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
-                close_all_buy_orders(open_positions, symbol)
+                close_buy_allposition(open_positions)
                 open_positions = trade.get_open_position()
-                close_all_sell_orders(open_positions, symbol)
+                close_sell_allposition(open_positions)
                 for symbol, VARAM in result_dict.items():
                     VARAM['TradingStatus'] = "DISABLE"
 
@@ -417,10 +439,9 @@ def main_strategy():
                 print(orderlog)
                 write_to_order_logs(orderlog)
                 open_positions = trade.get_open_position()
-                close_all_buy_orders(open_positions, symbol)
-
+                close_buy_allposition(open_positions)
                 open_positions = trade.get_open_position()
-                close_all_sell_orders(open_positions, symbol)
+                close_sell_allposition(open_positions)
 
                 for symbol, VARAM in result_dict.items():
                     VARAM['TradingStatus'] = "DISABLE"
@@ -443,11 +464,37 @@ def write_to_order_logs(message):
 # trade.get_data(symbol="XAUUSD", timeframe="TIMEFRAME_M5")
 #
 
-
+runonce=True
 # trade.mt_buy(symbol="EURUSD",lot=0.01,MagicNumber=12345)
 # trade.mt_close_sell(symbol="EURUSD",lot=0.01,orderid=64504309)
+StartTime = credentials_dict.get('StartTime')
+start_time = datetime.strptime(StartTime, '%H:%M').time()
 while True:
-    main_strategy()
+
+
+    now = datetime.now().time()
+    print("now:", now)
+    print("start_time before:", start_time)
+
+    if now >= start_time:
+        if runonce==True:
+            time.sleep(3)
+            runonce=False
+        main_strategy()
+        start_time = datetime.strptime('00:00', '%H:%M').time()
+        print("start_time after:", start_time)
+
+        # Set the initial last run date to today
+
+    # current_date = datetime.today()
+    # if current_date > last_run_date:
+    #     orderlog="Relogin happened token refreshed"
+    #     print(orderlog)
+    #     write_to_order_logs(orderlog)
+    #     trade.login (Login,Password,Server)
+    #     last_run_date = current_date + timedelta(days=1)
+
+
 
 
 

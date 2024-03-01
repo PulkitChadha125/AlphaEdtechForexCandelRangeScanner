@@ -7,11 +7,16 @@
     <list default="true" id="e7cc47da-0a8b-4538-97b4-9a4a018e1222" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MT5Credentials.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Credentials.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT5Integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT5Integration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MachineLogs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MachineLogs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainStrategy.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MainStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradeSettings.csv" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSettings.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/MainStrategy.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MainStrategy/xref-MainStrategy.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/MainStrategy/xref-MainStrategy.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,19 +35,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.MT5Integration.executor": "Run",
-    "Python.MainStrategy.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.MT5Integration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MainStrategy.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.14475.56" />
       </set>
     </attachedChunks>
   </component>

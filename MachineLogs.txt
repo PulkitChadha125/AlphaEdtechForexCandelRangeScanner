@@ -1,5 +1,98 @@
-23/02/2024 15:02:39 Short order executed for BTCUSD for lotsize= 1  @ 50986.18 ,Step = 1,Target1 = 50948.25 
+28/02/2024 22:55:00 Buy order executed for BTCUSD for lotsize= 1.0  @ 62678.93 ,Step = 1,Target1 =62719.795 
 can only concatenate tuple (not "str") to tuple
-23/02/2024 15:03:40 Target Executed For Short Trade All Position Exited @ BTCUSD @ price 50949.39, high: 51003.76, low: 50905.16 
-23/02/2024 15:03:40 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =436583487
-23/02/2024 15:03:40 OrderSendResult(retcode=10009, deal=284746732, order=436584966, volume=1.0, price=50973.71, bid=50949.39, ask=50973.71, comment='python  close se', request_id=969645889, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=50973.71, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=436583487, position_by=0))
+28/02/2024 22:55:01 Target Executed For Buy Trade All Position Exited @ BTCUSD @ price 62717.1, high: 62760.66, low: 62660.77 
+28/02/2024 22:55:01 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443476792
+28/02/2024 22:55:01 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=62717.1, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443476792, position_by=0))
+28/02/2024 22:55:01 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443510604
+28/02/2024 22:55:01 OrderSendResult(retcode=10009, deal=290062549, order=443510672, volume=1.0, price=62717.1, bid=62717.1, ask=62756.76, comment='python  close bu', request_id=1694550984, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=62717.1, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443510604, position_by=0))
+28/02/2024 22:56:49 Buy order executed for BTCUSD for lotsize= 1  @ 61769.83 ,Step = 1,Target1 =62094.8 
+can only concatenate tuple (not "str") to tuple
+Relogin happened token refreshed
+28/02/2024 22:57:12 Target Executed For Buy Trade All Position Exited @ BTCUSD @ price 62094.89, high: 62760.66, low: 61428.94 
+28/02/2024 22:57:12 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443476792
+28/02/2024 22:57:12 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=62094.89, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443476792, position_by=0))
+28/02/2024 22:57:12 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443523778
+28/02/2024 22:57:12 OrderSendResult(retcode=10009, deal=290068319, order=443524483, volume=1.0, price=62094.89, bid=62094.89, ask=62136.91, comment='python  close bu', request_id=1694550986, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=62094.89, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443523778, position_by=0))
+28/02/2024 22:59:36 Buy order executed for BTCUSD for lotsize= 1  @ 61986.06 ,Step = 1,Target1 =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:36 Buy order executed for BTCUSD for lotsize= 2.0  @ 61959.03 ,Step = 2,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:37 Buy order executed for BTCUSD for lotsize= 4.0  @ 61927.6 ,Step = 3,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:38 Buy order executed for BTCUSD for lotsize= 8.0  @ 61892.43 ,Step = 4,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:47 Buy order executed for BTCUSD for lotsize= 16.0  @ 61867.02 ,Step = 5,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:49 Buy order executed for BTCUSD for lotsize= 32.0  @ 61836.38 ,Step = 6,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:56 Buy order executed for BTCUSD for lotsize= 64.0  @ 61785.25 ,Step = 7,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:57 Buy order executed for BTCUSD for lotsize= 128.0  @ 61755.05 ,Step = 8,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 22:59:58 Buy order executed for BTCUSD for lotsize= 256.0  @ 61725.44 ,Step = 9,Target =62094.8 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:00:07 Buy order executed for BTCUSD for lotsize= 512.0  @ 61699.75 ,Step = 10,Target =62230.205 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:00:07 Stoploss Executed For Buy Trade All Position Exited @ BTCUSD @ price 61640.74 
+28/02/2024 23:00:07 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443476792
+28/02/2024 23:00:07 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=61640.74, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443476792, position_by=0))
+28/02/2024 23:00:07 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443529172
+28/02/2024 23:00:07 OrderSendResult(retcode=10009, deal=290073110, order=443530872, volume=1.0, price=61670.53, bid=61670.53, ask=61710.85, comment='python  close bu', request_id=1694550992, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=61640.74, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443529172, position_by=0))
+28/02/2024 23:00:08 Target Executed For buy Trade @ BTCUSD @ 2.0 order no =443529194
+28/02/2024 23:00:08 OrderSendResult(retcode=10009, deal=290073121, order=443530883, volume=2.0, price=61670.53, bid=61670.53, ask=61710.85, comment='python  close bu', request_id=1694550993, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=2.0, price=61670.53, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443529194, position_by=0))
+28/02/2024 23:00:08 Target Executed For buy Trade @ BTCUSD @ 4.0 order no =443529225
+28/02/2024 23:00:08 OrderSendResult(retcode=10009, deal=290073137, order=443530897, volume=4.0, price=61659.090000000004, bid=61659.090000000004, ask=61695.01, comment='python  close bu', request_id=1694550994, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=4.0, price=61670.53, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443529225, position_by=0))
+28/02/2024 23:00:08 Target Executed For buy Trade @ BTCUSD @ 8.0 order no =443529385
+28/02/2024 23:00:08 OrderSendResult(retcode=10009, deal=290073147, order=443530908, volume=8.0, price=61648.22, bid=61648.22, ask=61686.700000000004, comment='python  close bu', request_id=1694550995, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=8.0, price=61659.09, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443529385, position_by=0))
+28/02/2024 23:00:09 Target Executed For buy Trade @ BTCUSD @ 16.0 order no =443529703
+28/02/2024 23:00:09 OrderSendResult(retcode=10009, deal=290073207, order=443530930, volume=16.0, price=61635.71, bid=61635.71, ask=61673.05, comment='python  close bu', request_id=1694550996, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=16.0, price=61648.22, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=1, type_filling=1, type_time=0, expiration=0, comment='python  close buy ', position=443529703, position_by=0))
+28/02/2024 23:07:11 Buy order executed for BTCUSD for lotsize= 1  @ 60203.18 ,Step = 1,Target1 =60462.525 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:10:54 Buy order executed for BTCUSD for lotsize= 1  @ 60382.4 ,Step = 1,Target1 =60401.145000000004 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:11:50 Short order executed for BTCUSD for lotsize= 1  @ 60348.47 ,Step = 1,Target1 = 60276.91 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:11:51 Target Executed For Short Trade All Position Exited @ BTCUSD @ price 60273.04, high: 60537.91, low: 60015.91 
+28/02/2024 23:11:51 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443476792
+28/02/2024 23:11:51 OrderSendResult(retcode=10009, deal=290102295, order=443577201, volume=1.0, price=60310.130000000005, bid=60257.99, ask=60310.130000000005, comment='python  close se', request_id=1694551000, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60321.1, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443476792, position_by=0))
+28/02/2024 23:11:52 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443566857
+28/02/2024 23:11:52 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60310.13, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443566857, position_by=0))
+28/02/2024 23:11:52 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443575617
+28/02/2024 23:11:52 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60310.13, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443575617, position_by=0))
+28/02/2024 23:11:52 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443577191
+28/02/2024 23:11:52 OrderSendResult(retcode=10009, deal=290102299, order=443577272, volume=1.0, price=60299.42, bid=60255.57, ask=60299.42, comment='python  close se', request_id=1694551001, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60310.13, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443577191, position_by=0))
+28/02/2024 23:12:56 Short order executed for BTCUSD for lotsize= 1  @ 60517.7 ,Step = 1,Target1 = 60276.91 
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:12:58 Short order executed for BTCUSD for lotsize= 2.0  @ 60554.07 ,Step = 2,Target =60284.990000000005
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:12:58 Short order executed for BTCUSD for lotsize= 4.0  @ 60579.7 ,Step = 3,Target =60297.805
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:12:59 Short order executed for BTCUSD for lotsize= 8.0  @ 60609.75 ,Step = 4,Target =60312.83
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:10 Short order executed for BTCUSD for lotsize= 16.0  @ 60637.97 ,Step = 5,Target =60326.94
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:11 Short order executed for BTCUSD for lotsize= 32.0  @ 60664.01 ,Step = 6,Target =60339.96000000001
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:13 Short order executed for BTCUSD for lotsize= 64.0  @ 60689.46 ,Step = 7,Target =60352.685
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:15 Short order executed for BTCUSD for lotsize= 128.0  @ 60717.19 ,Step = 8,Target =60366.55
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:20 Short order executed for BTCUSD for lotsize= 256.0  @ 60750.37 ,Step = 9,Target =60383.14
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:21 Short order executed for BTCUSD for lotsize= 512.0  @ 60783.99 ,Step = 10,Target =60399.95
+can only concatenate tuple (not "str") to tuple
+28/02/2024 23:13:21 Stoploss Executed For Short Trade All Position Exited @ BTCUSD @ price 60813.41 
+28/02/2024 23:13:21 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443566857
+28/02/2024 23:13:21 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60871.22, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443566857, position_by=0))
+28/02/2024 23:13:21 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443575617
+28/02/2024 23:13:21 OrderSendResult(retcode=10013, deal=0, order=0, volume=0.0, price=0.0, bid=0.0, ask=0.0, comment='Invalid request', request_id=0, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60871.22, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443575617, position_by=0))
+28/02/2024 23:13:21 Target Executed For buy Trade @ BTCUSD @ 1.0 order no =443578468
+28/02/2024 23:13:21 OrderSendResult(retcode=10009, deal=290103944, order=443579322, volume=1.0, price=60859.65, bid=60810.19, ask=60859.65, comment='python  close se', request_id=1694551007, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=1.0, price=60871.22, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443578468, position_by=0))
+28/02/2024 23:13:21 Target Executed For buy Trade @ BTCUSD @ 2.0 order no =443578501
+28/02/2024 23:13:21 OrderSendResult(retcode=10009, deal=290103952, order=443579337, volume=2.0, price=60878.06, bid=60828.08, ask=60878.06, comment='python  close se', request_id=1694551008, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=2.0, price=60859.65, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443578501, position_by=0))
+28/02/2024 23:13:22 Target Executed For buy Trade @ BTCUSD @ 4.0 order no =443578590
+28/02/2024 23:13:22 OrderSendResult(retcode=10009, deal=290103966, order=443579351, volume=4.0, price=60875.42, bid=60832.29, ask=60875.42, comment='python  close se', request_id=1694551009, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=4.0, price=60878.06, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443578590, position_by=0))
+28/02/2024 23:13:22 Target Executed For buy Trade @ BTCUSD @ 8.0 order no =443578609
+28/02/2024 23:13:22 OrderSendResult(retcode=10009, deal=290103981, order=443579365, volume=8.0, price=60910.26, bid=60857.49, ask=60910.26, comment='python  close se', request_id=1694551010, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=8.0, price=60875.42, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443578609, position_by=0))
+28/02/2024 23:13:22 Target Executed For buy Trade @ BTCUSD @ 16.0 order no =443578935
+28/02/2024 23:13:22 OrderSendResult(retcode=10009, deal=290103989, order=443579394, volume=16.0, price=60899.96, bid=60854.79, ask=60899.96, comment='python  close se', request_id=1694551011, retcode_external=0, request=TradeRequest(action=1, magic=0, order=0, symbol='BTCUSD', volume=16.0, price=60910.26, stoplimit=0.0, sl=0.0, tp=0.0, deviation=0, type=0, type_filling=1, type_time=0, expiration=0, comment='python  close sell ', position=443578935, position_by=0))
